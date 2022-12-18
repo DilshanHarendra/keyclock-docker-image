@@ -1,0 +1,37 @@
+version: '3.1'
+
+volumes:
+  my-database:
+    driver: local
+
+services:
+  mysql:
+    container_name: mysql_database
+    image: mysql:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keyclock
+      MYSQL_USER: dbUser
+      MYSQL_PASSWORD: rootPass
+    volumes:
+      - my-database:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
+  keyclock:
+    container_name: keyclocl_app
+    image: quay.io/keycloak/keycloak:legacy
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      DB_VENDOR: MYSQL
+      DB_ADDR: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_DATABASE: keyclock
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
