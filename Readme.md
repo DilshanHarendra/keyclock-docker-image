@@ -26,3 +26,8 @@ keycloak-local \
 start-dev \
 --db=postgres --features=token-exchange \
 --db-url=jdbc:postgresql://localhost:5432/keycloak
+
+
+##Run docker-compose
+
+docker-compose up
