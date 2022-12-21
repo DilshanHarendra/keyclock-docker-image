@@ -20,7 +20,7 @@ services:
       - "3307:3306"
 
   keyclock:
-    container_name: keyclocl_app
+    container_name: keyclock_app
     image: quay.io/keycloak/keycloak:legacy
     environment:
       KEYCLOAK_USER: admin
